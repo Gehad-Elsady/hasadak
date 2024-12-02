@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "16660634737",
+    "project_id": "hasadak-e13f0",
+    "storage_bucket": "hasadak-e13f0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16660634737:android:72c98776e79ba69f2f0fd0",
+        "android_client_info": {
+          "package_name": "com.example.hasadak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDP_1dgl-lXmU81ZcmJ8HWCL3z9E3FxY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
