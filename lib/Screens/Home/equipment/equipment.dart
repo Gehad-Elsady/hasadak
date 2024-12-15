@@ -4,8 +4,8 @@ import 'package:hasadak/Backend/firebase_functions.dart';
 import 'package:hasadak/Screens/Home/seeds/info-screen.dart';
 import 'package:hasadak/widget/services-item.dart';
 
-class SeedsScreen extends StatelessWidget {
-  const SeedsScreen({super.key});
+class EquipmentScreen extends StatelessWidget {
+  const EquipmentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class SeedsScreen extends StatelessWidget {
             children: [
               // Title styling
               Text(
-                'Seeds',
+                'Equipment',
                 style: TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
@@ -39,7 +39,7 @@ class SeedsScreen extends StatelessWidget {
               SizedBox(height: 16),
               // StreamBuilder for fetching services
               StreamBuilder(
-                stream: FirebaseFunctions.getSeeds(),
+                stream: FirebaseFunctions.getEquipment(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());

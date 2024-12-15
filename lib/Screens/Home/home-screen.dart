@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hasadak/Screens/Home/engineers/engineers.dart';
+import 'package:hasadak/Screens/Home/equipment/equipment.dart';
 import 'package:hasadak/Screens/Home/seeds/seeds-screen.dart';
+import 'package:hasadak/Screens/Home/share%20land/share_land.dart';
 import 'package:hasadak/photos/images.dart';
 import 'package:hasadak/widget/Drawer/mydrawer.dart';
 
@@ -99,9 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> screens = [
     WelcomeScreen(),
-    WelcomeScreen(),
+    EquipmentScreen(),
     SeedsScreen(),
-    WelcomeScreen(),
-    WelcomeScreen(),
+    Engineers(),
+    ShareLand(),
   ];
 }

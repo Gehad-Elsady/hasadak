@@ -18,7 +18,7 @@ class SocialMediaIcons extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF79F21E),
+              color: Color(0xFF14746f),
             ),
             child: IconButton(
               onPressed: () {
@@ -30,7 +30,7 @@ class SocialMediaIcons extends StatelessWidget {
                 );
               },
               icon: FaIcon(FontAwesomeIcons.facebookF),
-              color: Colors.black,
+              color: Colors.white,
               iconSize: 20,
             ),
           ),
@@ -42,7 +42,7 @@ class SocialMediaIcons extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF79F21E),
+              color: Color(0xFF14746f),
             ),
             child: IconButton(
               onPressed: () {
@@ -54,7 +54,7 @@ class SocialMediaIcons extends StatelessWidget {
                 );
               },
               icon: FaIcon(FontAwesomeIcons.twitter),
-              color: Colors.black,
+              color: Colors.white,
               iconSize: 20,
             ),
           ),
@@ -66,7 +66,7 @@ class SocialMediaIcons extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF79F21E),
+              color: Color(0xFF14746f),
             ),
             child: IconButton(
               onPressed: () {
@@ -78,7 +78,7 @@ class SocialMediaIcons extends StatelessWidget {
                 );
               },
               icon: FaIcon(FontAwesomeIcons.linkedin),
-              color: Colors.black,
+              color: Colors.white,
               iconSize: 20,
             ),
           ),
@@ -90,7 +90,7 @@ class SocialMediaIcons extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF79F21E),
+              color: Color(0xFF14746f),
             ),
             child: IconButton(
               onPressed: () {
@@ -102,7 +102,7 @@ class SocialMediaIcons extends StatelessWidget {
                 );
               },
               icon: FaIcon(FontAwesomeIcons.instagram),
-              color: Colors.black,
+              color: Colors.white,
               iconSize: 20,
             ),
           ),

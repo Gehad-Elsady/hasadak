@@ -3,9 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:hasadak/Screens/Profile/model/profilemodel.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
-// import 'package:hasadak/theme/app-colors.dart';
+import 'package:hasadak/Screens/Profile/model/profilemodel.dart';
+import 'package:hasadak/theme/app-colors.dart';
 import 'package:hasadak/validation/validation.dart';
 import 'package:hasadak/widget/Drawer/mydrawer.dart';
 import 'package:image_picker/image_picker.dart';
@@ -79,7 +79,7 @@ class _UserProfileState extends State<UserProfile> {
               fontSize: 35,
               fontWeight: FontWeight.bold,
             )),
-        backgroundColor: const Color(0xFF6EDE8A),
+        backgroundColor: const Color(0xFF56ab91),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -88,9 +88,8 @@ class _UserProfileState extends State<UserProfile> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF6EDE8A),
-              Color(0xFF4AD66D),
-              Color(0xFF155D27),
+              Color(0xFF56ab91),
+              Color(0xFF14746f),
             ],
           ),
         ),
@@ -152,28 +151,75 @@ class _UserProfileState extends State<UserProfile> {
                     style: const TextStyle(color: Colors.white),
                     controller: firstName,
                     decoration: InputDecoration(
-                        labelText: 'first-name',
-                        labelStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        )),
+                      labelText: 'First name',
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      // Define the border
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(10.0), // Rounded corners
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color when enabled
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.green, // Border color when focused
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                    ),
                     validator: (value) =>
                         value!.isEmpty ? 'first-name-error' : null,
                   ),
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 20),
                 Expanded(
                   child: TextFormField(
                     style: const TextStyle(color: Colors.white),
                     controller: lastName,
                     decoration: InputDecoration(
-                        labelText: 'last-name',
-                        labelStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        )),
+                      labelText: 'last name',
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(10.0), // Rounded corners
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color when enabled
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.green, // Border color when focused
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                    ),
                     validator: (value) =>
                         value!.isEmpty ? 'last-name-error' : null,
                   ),
@@ -185,12 +231,34 @@ class _UserProfileState extends State<UserProfile> {
               style: const TextStyle(color: Colors.white),
               controller: email,
               decoration: InputDecoration(
-                  labelText: 'email',
-                  labelStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  )),
+                labelText: 'email',
+                labelStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                  borderSide: const BorderSide(
+                    color: Colors.white, // Border color
+                    width: 2.0, // Border width
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(
+                    color: Colors.white, // Border color when enabled
+                    width: 2.0, // Border width
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(
+                    color: Colors.green, // Border color when focused
+                    width: 2.0, // Border width
+                  ),
+                ),
+              ),
               validator: Validation.validateEmail(email.text),
             ),
             const SizedBox(height: 30),
@@ -198,12 +266,34 @@ class _UserProfileState extends State<UserProfile> {
               style: const TextStyle(color: Colors.white),
               controller: address,
               decoration: InputDecoration(
-                  labelText: 'address',
-                  labelStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  )),
+                labelText: 'address',
+                labelStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                  borderSide: const BorderSide(
+                    color: Colors.white, // Border color
+                    width: 2.0, // Border width
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(
+                    color: Colors.white, // Border color when enabled
+                    width: 2.0, // Border width
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(
+                    color: Colors.green, // Border color when focused
+                    width: 2.0, // Border width
+                  ),
+                ),
+              ),
               validator: (value) => value!.isEmpty ? 'address-error' : null,
             ),
             const SizedBox(height: 30),
@@ -211,12 +301,34 @@ class _UserProfileState extends State<UserProfile> {
               style: const TextStyle(color: Colors.white),
               controller: contactNumber,
               decoration: InputDecoration(
-                  labelText: 'phone-number',
-                  labelStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  )),
+                labelText: 'phone number',
+                labelStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                  borderSide: const BorderSide(
+                    color: Colors.white, // Border color
+                    width: 2.0, // Border width
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(
+                    color: Colors.white, // Border color when enabled
+                    width: 2.0, // Border width
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(
+                    color: Colors.green, // Border color when focused
+                    width: 2.0, // Border width
+                  ),
+                ),
+              ),
               validator: (value) =>
                   value!.isEmpty ? 'phone-number-error' : null,
             ),

@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,20 +36,25 @@ class WelcomePart extends StatelessWidget {
                   SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
-                    child: Text(
-                      "Welcome to Hasadak",
-                      style: GoogleFonts.domine(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        TypewriterAnimatedText('Welcome to Hasadak',
+                            textStyle: GoogleFonts.domine(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                      isRepeatingAnimation: true,
+                      onTap: () {
+                        print("Tap Event");
+                      },
                     ),
                   ),
                   SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Text(
-                      userName ?? "hahahahhaha",
+                      userName ?? "User",
                       style: GoogleFonts.domine(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,

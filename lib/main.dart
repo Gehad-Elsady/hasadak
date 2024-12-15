@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Screens/Auth/login-screen.dart';
 import 'package:hasadak/Screens/Auth/signup-screen.dart';
-import 'package:hasadak/Screens/Home/seeds/seeds-info-screen.dart';
+import 'package:hasadak/Screens/Home/seeds/info-screen.dart';
 import 'package:hasadak/Screens/OnBoarding/boarding-screen.dart';
 import 'package:hasadak/Screens/SplashScreen/splash-screen.dart';
 import 'package:hasadak/Screens/add-services/addservicescreen.dart';
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         SignUpPage.routeName: (context) => SignUpPage(),
         UserProfile.routeName: (context) => UserProfile(),
         AddServicePage.routeName: (context) => AddServicePage(),
-        SeedsInfoScreen.routeName: (context) => SeedsInfoScreen(),
+        InfoScreen.routeName: (context) => InfoScreen(),
       },
     );
   }

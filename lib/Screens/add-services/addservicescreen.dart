@@ -82,34 +82,67 @@ class _AddServicePageState extends State<AddServicePage> {
     return Scaffold(
       appBar: AppBar(title: Text('Add Service')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(height: 24),
+
+                // Service Name
                 TextFormField(
                   controller: _nameController,
-                  decoration: InputDecoration(labelText: 'Service Name'),
+                  decoration: InputDecoration(
+                    labelText: 'Service Name',
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                  ),
                   validator: (value) =>
                       value!.isEmpty ? 'Please enter a name' : null,
                 ),
+                SizedBox(height: 16),
+
+                // Description
                 TextFormField(
                   controller: _descriptionController,
-                  decoration: InputDecoration(labelText: 'Description'),
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                  ),
+                  maxLines: 3,
                   validator: (value) =>
                       value!.isEmpty ? 'Please enter a description' : null,
                 ),
+                SizedBox(height: 16),
+
+                // Price
                 TextFormField(
                   controller: _priceController,
-                  decoration: InputDecoration(labelText: 'Price'),
+                  decoration: InputDecoration(
+                    labelText: 'Price',
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                  ),
                   keyboardType: TextInputType.number,
                   validator: (value) =>
                       value!.isEmpty ? 'Please enter a price' : null,
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 16),
+
+                // Service Type Dropdown
                 DropdownButtonFormField<String>(
-                  decoration: InputDecoration(labelText: 'Service Type'),
+                  decoration: InputDecoration(
+                    labelText: 'Service Type',
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                  ),
                   value: _selectedServiceType,
                   items: _serviceTypes
                       .map((type) => DropdownMenuItem(
@@ -125,20 +158,43 @@ class _AddServicePageState extends State<AddServicePage> {
                   validator: (value) =>
                       value == null ? 'Please select a service type' : null,
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 16),
+
+                // Image Picker
                 _image == null
-                    ? Text('No image selected')
-                    : Image.file(_image!, height: 150),
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: Text(
+                          'No image selected',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      )
+                    : Image.file(_image!, height: 150, fit: BoxFit.cover),
                 ElevatedButton(
                   onPressed: _pickImage,
                   child: Text('Pick Image'),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 24),
+
+                // Submit Button
                 _isUploading
-                    ? CircularProgressIndicator()
+                    ? Center(child: CircularProgressIndicator())
                     : ElevatedButton(
                         onPressed: _saveService,
                         child: Text('Add Service'),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
                       ),
               ],
             ),
