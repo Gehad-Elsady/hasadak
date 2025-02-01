@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hasadak/Screens/Home/crops/crops_screen.dart';
 import 'package:hasadak/Screens/Home/engineers/engineers.dart';
 import 'package:hasadak/Screens/Home/equipment/equipment.dart';
 import 'package:hasadak/Screens/Home/seeds/seeds-screen.dart';
@@ -81,6 +82,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
+              AssetImage("assets/images/sale.png"),
+              size: 30,
+            ),
+            label: "Crops",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
               AssetImage("assets/images/worker_1839274.png"),
               size: 30,
             ),
@@ -104,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
     WelcomeScreen(),
     EquipmentScreen(),
     SeedsScreen(),
+    CropsScreen(),
     Engineers(),
-    ShareLand(),
+    ShareLand()
   ];
 }

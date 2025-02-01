@@ -204,15 +204,27 @@ class _SignUpPageState extends State<SignUpPage> {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    return Lottie.asset(
-                                        "assets/lottie/created.json");
+                                    return AlertDialog(
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Lottie.asset(Photos.create),
+                                          SizedBox(height: 16),
+                                          Text(
+                                            "Please Verify Your Email Address to Login",
+                                            style: TextStyle(fontSize: 20),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
+                                      ),
+                                    );
                                   },
                                 );
                                 Timer(
                                   Duration(seconds: 3),
                                   () {
                                     Navigator.pushNamed(
-                                        context, HomeScreen.routeName);
+                                        context, LoginPage.routeName);
                                   },
                                 );
                               },

@@ -10,6 +10,8 @@ class Photos {
   static const String tree = "assets/lottie/tree.json";
   static const String login = "assets/images/key.png";
   static const String logo = "assets/images/tea.png";
+  static const String emptyCart =
+      "assets/lottie/Animation - 1738160219532.json";
 
   static const List appBar = [
     "assets/images/close-up-seeder-attached-tractor-field.jpg",

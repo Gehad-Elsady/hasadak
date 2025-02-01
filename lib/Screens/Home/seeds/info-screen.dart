@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hasadak/Backend/firebase_functions.dart';
 import 'package:hasadak/Screens/add-services/model/service-model.dart';
+import 'package:hasadak/Screens/cart/model/cart-model.dart';
 
 class InfoScreen extends StatelessWidget {
   static const String routeName = 'seeds-info-screen';
@@ -42,8 +45,19 @@ class InfoScreen extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(15.0),
         child: FloatingActionButton(
-          onPressed: () {
-            // Handle shopping cart action
+          onPressed: () async {
+            CartModel cartData = CartModel(
+              itemId:
+                  "", // Placeholder, actual itemId will be set in FirebaseFunctions
+              serviceModel: model,
+              userId: FirebaseAuth.instance.currentUser!.uid,
+            );
+            await FirebaseFunctions.addCartService(cartData);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Service added successfully!'),
+              ),
+            );
           },
           backgroundColor: Colors.white,
           child: const Icon(

@@ -1,5 +1,9 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hasadak/Screens/Home/home-screen.dart';
+import 'package:hasadak/widget/Drawer/mydrawer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,7 +27,7 @@ class _AddServicePageState extends State<AddServicePage> {
 
   // Dropdown variables
   String? _selectedServiceType;
-  final List<String> _serviceTypes = ['Seeds', 'Equipment'];
+  final List<String> _serviceTypes = ['Seeds', 'Equipment', "crops"];
 
   // Pick an image
   Future<void> _pickImage() async {
@@ -65,10 +69,12 @@ class _AddServicePageState extends State<AddServicePage> {
           'type': _selectedServiceType,
           'image': imageUrl,
           'createdAt': Timestamp.now(),
+          'userId': FirebaseAuth.instance.currentUser!.uid
         });
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Service added successfully')));
-        Navigator.pop(context); // Go back after saving
+        Navigator.pushReplacementNamed(
+            context, HomeScreen.routeName); // Go back after saving
       } else {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Failed to upload image')));
@@ -80,123 +86,273 @@ class _AddServicePageState extends State<AddServicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add Service')),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: 24),
+      drawer: MyDrawer(),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Add Service',
+          style: GoogleFonts.domine(
+            fontSize: 30,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Color(0xFF56ab91),
+      ),
+      body: Container(
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF56ab91),
+              Color(0xFF14746f),
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 24),
 
-                // Service Name
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Service Name',
-                    border: OutlineInputBorder(),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                  ),
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter a name' : null,
-                ),
-                SizedBox(height: 16),
-
-                // Description
-                TextFormField(
-                  controller: _descriptionController,
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                    border: OutlineInputBorder(),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                  ),
-                  maxLines: 3,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter a description' : null,
-                ),
-                SizedBox(height: 16),
-
-                // Price
-                TextFormField(
-                  controller: _priceController,
-                  decoration: InputDecoration(
-                    labelText: 'Price',
-                    border: OutlineInputBorder(),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                  ),
-                  keyboardType: TextInputType.number,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter a price' : null,
-                ),
-                SizedBox(height: 16),
-
-                // Service Type Dropdown
-                DropdownButtonFormField<String>(
-                  decoration: InputDecoration(
-                    labelText: 'Service Type',
-                    border: OutlineInputBorder(),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                  ),
-                  value: _selectedServiceType,
-                  items: _serviceTypes
-                      .map((type) => DropdownMenuItem(
-                            value: type,
-                            child: Text(type),
-                          ))
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedServiceType = value;
-                    });
-                  },
-                  validator: (value) =>
-                      value == null ? 'Please select a service type' : null,
-                ),
-                SizedBox(height: 16),
-
-                // Image Picker
-                _image == null
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: Text(
-                          'No image selected',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      )
-                    : Image.file(_image!, height: 150, fit: BoxFit.cover),
-                ElevatedButton(
-                  onPressed: _pickImage,
-                  child: Text('Pick Image'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 24),
-
-                // Submit Button
-                _isUploading
-                    ? Center(child: CircularProgressIndicator())
-                    : ElevatedButton(
-                        onPressed: _saveService,
-                        child: Text('Add Service'),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                  // Service Name
+                  TextFormField(
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: 'Service Name',
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      // Define the border
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(10.0), // Rounded corners
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color
+                          width: 2.0, // Border width
                         ),
                       ),
-              ],
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color when enabled
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.black, // Border color when focused
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                    ),
+                    validator: (value) =>
+                        value!.isEmpty ? 'Please enter a name' : null,
+                  ),
+                  SizedBox(height: 16),
+
+                  // Description
+                  TextFormField(
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    controller: _descriptionController,
+                    decoration: InputDecoration(
+                      labelText: 'Description',
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      // Define the border
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(10.0), // Rounded corners
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color when enabled
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.black, // Border color when focused
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                    ),
+                    maxLines: 3,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Please enter a description' : null,
+                  ),
+                  SizedBox(height: 16),
+
+                  // Price
+                  TextFormField(
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    controller: _priceController,
+                    decoration: InputDecoration(
+                      labelText: 'Price',
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      // Define the border
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(10.0), // Rounded corners
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color when enabled
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.black, // Border color when focused
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                    ),
+                    keyboardType: TextInputType.number,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Please enter a price' : null,
+                  ),
+                  SizedBox(height: 16),
+
+                  // Service Type Dropdown
+                  DropdownButtonFormField<String>(
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    decoration: InputDecoration(
+                      labelText: 'Service Type',
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      // Define the border
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(10.0), // Rounded corners
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.white, // Border color when enabled
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.black, // Border color when focused
+                          width: 2.0, // Border width
+                        ),
+                      ),
+                    ),
+                    value: _selectedServiceType,
+                    icon: const Icon(Icons.arrow_drop_down,
+                        color: Colors.white), // White dropdown icon
+                    dropdownColor: Color.fromARGB(255, 13, 56, 43),
+                    items: _serviceTypes
+                        .map((type) => DropdownMenuItem(
+                              value: type,
+                              child: Text(type),
+                            ))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedServiceType = value;
+                      });
+                    },
+                    validator: (value) =>
+                        value == null ? 'Please select a service type' : null,
+                  ),
+                  SizedBox(height: 16),
+
+                  // Image Picker
+                  _image == null
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Text(
+                            'No image selected',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        )
+                      : Image.file(_image!, height: 150, fit: BoxFit.cover),
+                  ElevatedButton(
+                    onPressed: _pickImage,
+                    child: Text(
+                      'Pick Image',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      textStyle: TextStyle(fontSize: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 24),
+
+                  // Submit Button
+                  _isUploading
+                      ? Center(child: CircularProgressIndicator())
+                      : ElevatedButton(
+                          onPressed: _saveService,
+                          child: Text(
+                            'Add Service',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            textStyle: TextStyle(fontSize: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                        ),
+                ],
+              ),
             ),
           ),
         ),
