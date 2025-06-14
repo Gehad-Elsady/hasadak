@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
 import 'package:hasadak/Screens/Home/seeds/info-screen.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class CropsScreen extends StatelessWidget {
   const CropsScreen({super.key});
@@ -27,7 +29,7 @@ class CropsScreen extends StatelessWidget {
             children: [
               // Title styling
               Text(
-                'Crops',
+                'crops'.tr(),
                 style: TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
@@ -114,8 +116,8 @@ class CropsScreen extends StatelessWidget {
                                         ),
                                         SizedBox(height: 8),
                                         Text(
-                                          "${service.price} EGP",
-                                          textAlign: TextAlign.end,
+                                          "${service.price} ${'egp'.tr()}",
+                                            textAlign: context.locale.languageCode == 'ar' ? TextAlign.start : TextAlign.end,
                                           style: TextStyle(
                                             fontSize: 14,
                                             color: Colors

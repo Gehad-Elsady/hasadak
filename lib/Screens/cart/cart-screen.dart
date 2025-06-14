@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,10 +20,10 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'cart',
+          'cart'.tr(),
           style: GoogleFonts.domine(
             fontSize: 30,
-            color: Colors.white,
+            color: const Color.fromARGB(255, 43, 32, 32),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -34,10 +35,10 @@ class CartScreen extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text("are-you-sure"),
+                    title: Text('are_you_sure'.tr()),
                     actions: [
                       TextButton(
-                        child: Text("yes"),
+                        child: Text('yes'.tr()),
                         onPressed: () {
                           FirebaseFunctions.clearCart(
                               FirebaseAuth.instance.currentUser!.uid);
@@ -45,7 +46,7 @@ class CartScreen extends StatelessWidget {
                         },
                       ),
                       TextButton(
-                        child: Text("no"),
+                        child: Text('no'.tr()),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -80,7 +81,7 @@ class CartScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(child: Text('error_occurred'.tr() + ': ${snapshot.error}'));
             }
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return Column(
@@ -89,7 +90,7 @@ class CartScreen extends StatelessWidget {
                   Lottie.asset(Photos.emptyCart,
                       height: 550, width: double.infinity),
                   Text(
-                    'cart-empty',
+                    'cart_empty'.tr(),
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
@@ -134,14 +135,14 @@ class CartScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'total-price',
+                        'total_price'.tr(),
                         style: GoogleFonts.domine(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                       ),
                       Text(
-                        '\$${totalPrice.toStringAsFixed(2)}',
+                        '${'egp'.tr()} ${totalPrice.toStringAsFixed(2)}',
                         style: GoogleFonts.domine(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
@@ -160,7 +161,7 @@ class CartScreen extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        'checkout',
+                        'checkout'.tr(),
                         style: GoogleFonts.domine(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
@@ -180,14 +181,14 @@ class CartScreen extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text('no-profile'),
-                                  content: Text('profile-error'),
+                                  title: Text('no_profile'.tr()),
+                                  content: Text('profile_error'.tr()),
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text('ok'),
+                                      child: Text('ok'.tr()),
                                     ),
                                   ],
                                 );

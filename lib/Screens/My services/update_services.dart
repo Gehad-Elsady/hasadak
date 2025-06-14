@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +143,7 @@ class _UpdateServicesState extends State<UpdateServices> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'update-service',
+          'update_service'.tr(),
           style: GoogleFonts.domine(
             fontSize: 30,
             color: Colors.blue,
@@ -170,7 +171,7 @@ class _UpdateServicesState extends State<UpdateServices> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'servec-details',
+                        'service_details'.tr(),
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -180,45 +181,45 @@ class _UpdateServicesState extends State<UpdateServices> {
                       TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
-                          labelText: 'add-service-name',
+                          labelText: 'service_name'.tr(),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                         validator: (value) =>
-                            value!.isEmpty ? 'Please enter a name' : null,
+                            value!.isEmpty ? 'enter_service_name'.tr() : null,
                       ),
                       SizedBox(height: 16),
                       TextFormField(
                         controller: _descriptionController,
                         decoration: InputDecoration(
-                          labelText: 'add-service-description',
+                          labelText: 'service_description'.tr(),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                         maxLines: 3,
                         validator: (value) => value!.isEmpty
-                            ? 'Please enter a description'
+                            ? 'enter_service_description'.tr()
                             : null,
                       ),
                       SizedBox(height: 16),
                       TextFormField(
                         controller: _priceController,
                         decoration: InputDecoration(
-                          labelText: 'add-service-price',
+                          labelText: 'service_price'.tr(),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                         keyboardType: TextInputType.number,
                         validator: (value) =>
-                            value!.isEmpty ? 'Please enter a price' : null,
+                            value!.isEmpty ? 'enter_service_price'.tr() : null,
                       ),
                       SizedBox(height: 20),
                       DropdownButtonFormField<String>(
                         decoration: InputDecoration(
-                          labelText: 'Service Type',
+                          labelText: 'service_type'.tr(),
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 14, horizontal: 12),
@@ -236,12 +237,12 @@ class _UpdateServicesState extends State<UpdateServices> {
                           });
                         },
                         validator: (value) => value == null
-                            ? 'Please select a service type'
+                            ? 'select_service_type'.tr()
                             : null,
                       ),
                       SizedBox(height: 20),
                       Text(
-                        'image',
+                        'image'.tr(),
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -250,7 +251,7 @@ class _UpdateServicesState extends State<UpdateServices> {
                       SizedBox(height: 16),
                       _image == null && _imageUrl == null
                           ? Text(
-                              'image-error',
+                              'image-error'.tr(),
                               style: TextStyle(color: Colors.grey),
                               textAlign: TextAlign.center,
                             )
@@ -271,7 +272,7 @@ class _UpdateServicesState extends State<UpdateServices> {
                       OutlinedButton.icon(
                         onPressed: _pickImage,
                         icon: Icon(Icons.image),
-                        label: Text('pick-image'),
+                        label: Text('pick_image'.tr()),
                         style: OutlinedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 16),
                         ),
@@ -286,7 +287,7 @@ class _UpdateServicesState extends State<UpdateServices> {
                 ? Center(child: CircularProgressIndicator())
                 : ElevatedButton(
                     onPressed: _updateService,
-                    child: Text('update-service',
+                    child: Text('update_service'.tr(),
                         style: TextStyle(
                             color: Colors.blue,
                             fontSize: 20,

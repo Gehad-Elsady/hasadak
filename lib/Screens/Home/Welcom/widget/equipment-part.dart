@@ -9,7 +9,7 @@ class EquipmentPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 215, // Adjust height as needed
+      height: 240, // Adjust height as needed
       child: StreamBuilder<List<ServiceModel>>(
         stream: FirebaseFunctions.getEquipment(),
         builder: (context, snapshot) {

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
@@ -22,9 +23,9 @@ class EquipmentTap extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Center(child: Text('error_loading_services'.tr()));
                 } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No services available'));
+                  return Center(child: Text('no_services_available'.tr()));
                 } else {
                   return GridView.builder(
                     shrinkWrap:
@@ -86,7 +87,7 @@ class EquipmentTap extends StatelessWidget {
                                       ),
                                       SizedBox(height: 8),
                                       Text(
-                                        "${service.price} EGP",
+                                        "${service.price} ${'egp'.tr()}",
                                         textAlign: TextAlign.end,
                                         style: TextStyle(
                                           fontSize: 14,
@@ -106,16 +107,15 @@ class EquipmentTap extends StatelessWidget {
                                               context: context,
                                               builder: (context) {
                                                 return AlertDialog(
-                                                  title: Text("Delete Service"),
-                                                  content: Text(
-                                                      "Are you sure you want to delete this service?"),
+                                                  title: Text('delete_service'.tr()),
+                                                  content: Text('confirm_delete_service'.tr()),
                                                   actions: [
                                                     TextButton(
                                                         onPressed: () {
                                                           Navigator.pop(
                                                               context);
                                                         },
-                                                        child: Text("Cancel")),
+                                                        child: Text('cancel'.tr())),
                                                     TextButton(
                                                         onPressed: () {
                                                           FirebaseFunctions
@@ -129,14 +129,14 @@ class EquipmentTap extends StatelessWidget {
                                                           Navigator.pop(
                                                               context);
                                                         },
-                                                        child: Text("Delete")),
+                                                        child: Text('delete'.tr())),
                                                   ],
                                                 );
                                               },
                                             );
                                           },
                                           child: Text(
-                                            "Delete",
+                                            'delete'.tr(),
                                             style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.white,

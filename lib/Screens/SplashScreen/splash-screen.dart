@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Screens/Auth/login-screen.dart';
 import 'package:hasadak/Screens/OnBoarding/boarding-screen.dart';
@@ -92,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       AppColors.splashColorS
                     ]).createShader(bounds),
                     child: Text(
-                      "Welcome to Hasadak",
+                      'welcome_to_hasadak'.tr(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24.0,
@@ -108,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       AppColors.splashColorS
                     ]).createShader(bounds),
                     child: Text(
-                      "We care about agricultural growth.",
+                      'we_care_about_agriculture'.tr(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,

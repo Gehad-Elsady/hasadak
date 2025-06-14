@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -73,7 +74,7 @@ class _AddLandPageState extends State<AddLandPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Add Land',
+          'add_land'.tr(),
           style: GoogleFonts.domine(
             fontSize: 30,
             color: Colors.white,
@@ -109,7 +110,7 @@ class _AddLandPageState extends State<AddLandPage> {
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     controller: _nameController,
                     decoration: InputDecoration(
-                      labelText: 'Land Location',
+                      labelText: 'land_location'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -140,7 +141,7 @@ class _AddLandPageState extends State<AddLandPage> {
                       ),
                     ),
                     validator: (value) =>
-                        (value?.isEmpty ?? true) ? 'Please enter a name' : null,
+                        (value?.isEmpty ?? true) ? 'enter_land_location'.tr() : null,
                   ),
                   SizedBox(height: 16),
 
@@ -149,7 +150,7 @@ class _AddLandPageState extends State<AddLandPage> {
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     controller: _descriptionController,
                     decoration: InputDecoration(
-                      labelText: 'Description',
+                      labelText: 'description'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -180,8 +181,8 @@ class _AddLandPageState extends State<AddLandPage> {
                       ),
                     ),
                     maxLines: 3,
-                    validator: (value) => (value?.isEmpty ?? true)
-                        ? 'Please enter a description'
+                   validator: (value) => (value?.isEmpty ?? true)
+                        ? 'enter_description'.tr()
                         : null,
                   ),
                   SizedBox(height: 16),
@@ -191,7 +192,7 @@ class _AddLandPageState extends State<AddLandPage> {
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     controller: _priceController,
                     decoration: InputDecoration(
-                      labelText: 'Price',
+                      labelText: 'price'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -223,7 +224,7 @@ class _AddLandPageState extends State<AddLandPage> {
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) => (value?.isEmpty ?? true)
-                        ? 'Please enter a price'
+                        ? 'enter_price'.tr()
                         : null,
                   ),
                   SizedBox(height: 16),
@@ -236,7 +237,7 @@ class _AddLandPageState extends State<AddLandPage> {
                               color: Colors.white, fontSize: 20),
 
                           decoration: InputDecoration(
-                            labelText: 'Space Type',
+                            labelText: 'space_type'.tr(),
                             labelStyle: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -295,7 +296,7 @@ class _AddLandPageState extends State<AddLandPage> {
                             });
                           },
                           validator: (value) => value == null
-                              ? 'Please select a space type'
+                              ? 'select_space_type'.tr()
                               : null,
                         ),
                       ),
@@ -306,7 +307,7 @@ class _AddLandPageState extends State<AddLandPage> {
                               color: Colors.white, fontSize: 20),
                           controller: _spaceController,
                           decoration: InputDecoration(
-                            labelText: 'Land Space',
+                            labelText: 'land_space'.tr(),
                             labelStyle: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -340,7 +341,7 @@ class _AddLandPageState extends State<AddLandPage> {
                           ),
                           keyboardType: TextInputType.number,
                           validator: (value) => (value?.isEmpty ?? true)
-                              ? 'Please enter the land space'
+                              ? 'enter_land_space'.tr()
                               : null,
                         ),
                       ),
@@ -353,7 +354,7 @@ class _AddLandPageState extends State<AddLandPage> {
                     style: const TextStyle(color: Colors.white, fontSize: 20),
 
                     decoration: InputDecoration(
-                      labelText: 'Investment Type',
+                      labelText: 'investment_type'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -407,7 +408,7 @@ class _AddLandPageState extends State<AddLandPage> {
                       });
                     },
                     validator: (value) => value == null
-                        ? 'Please select an investment type'
+                        ? 'select_investment_type'.tr()
                         : null,
                   ),
                   SizedBox(height: 16),
@@ -417,7 +418,7 @@ class _AddLandPageState extends State<AddLandPage> {
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Text(
-                            'No image selected',
+                            'no_image_selected'.tr(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.white,
@@ -429,7 +430,7 @@ class _AddLandPageState extends State<AddLandPage> {
                   ElevatedButton(
                     onPressed: _pickImage,
                     child: Text(
-                      'Pick Image',
+                      'pick_image'.tr(),
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -456,7 +457,7 @@ class _AddLandPageState extends State<AddLandPage> {
                               if (_image == null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                      content: Text('Please select an image')),
+                                      content: Text('please_select_image'.tr())),
                                 );
                                 return;
                               }
@@ -469,7 +470,7 @@ class _AddLandPageState extends State<AddLandPage> {
                               if (imageUrl == null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                      content: Text('Image upload failed')),
+                                      content: Text('image_upload_failed'.tr())),
                                 );
                                 setState(() {
                                   _isUploading = false;
@@ -514,12 +515,12 @@ class _AddLandPageState extends State<AddLandPage> {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text("Error"),
-                                      content: Text(
-                                          "Please complete your profile before adding a land"),
+                                      title: Text("error".tr()),
+                                     content: Text('complete_profile_before_land'.tr()),
+
                                       actions: [
                                         TextButton(
-                                          child: Text("OK"),
+child: Text('ok'.tr()),
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
@@ -532,7 +533,7 @@ class _AddLandPageState extends State<AddLandPage> {
                             }
                           },
                           child: Text(
-                            'Google Map & Confirm',
+                            'google_map_confirm'.tr(),
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
 import 'package:hasadak/Screens/add-services/model/service-model.dart';
@@ -35,7 +36,7 @@ class CartItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  '\$${service.price}',
+                    '${'egp'.tr()} ${service.price}',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -57,12 +58,12 @@ class CartItem extends StatelessWidget {
                         FirebaseFunctions.deleteCartService(itemId);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Item deleted successfully!'),
+                              content: Text('item_deleted_successfully'.tr()),
                           ),
                         );
                         // print(itemId);
                       },
-                      child: Text('delete'),
+                        child: Text('delete'.tr()),
                     ),
                     // Quantity Control (optional)
                   ],

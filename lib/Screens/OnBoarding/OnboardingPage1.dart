@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/photos/images.dart';
 import 'package:lottie/lottie.dart';
@@ -24,8 +25,8 @@ class OnboardingPage1 extends StatelessWidget {
           children: [
             Lottie.asset(Photos.onBoarding1, height: 300),
             const SizedBox(height: 30),
-            const Text(
-              'Welcome to Hasadak',
+             Text(
+              'onboarding1_title'.tr(),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -34,8 +35,8 @@ class OnboardingPage1 extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 15),
-            const Text(
-              'Let’s make your farmer journey very easy',
+             Text(
+              'onboarding1_subtitle'.tr(),
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black,

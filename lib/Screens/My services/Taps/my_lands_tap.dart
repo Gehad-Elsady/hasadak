@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
@@ -16,13 +17,13 @@ class MyLandsTap extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('Something went wrong: ${snapshot.error}'));
+          return Center(child: Text('error_loading_lands'.tr()));
         }
 
         if (!snapshot.hasData ||
             snapshot.data == null ||
             snapshot.data!.isEmpty) {
-          return Center(child: Text('No services found'));
+          return Center(child: Text('no_lands_found'.tr()));
         }
 
         final services = snapshot.data!;
@@ -80,7 +81,7 @@ class MyLandsTap extends StatelessWidget {
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: 'Investment Type:\n',
+                                      text: 'investment_type'.tr() + ':\n',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,
@@ -98,7 +99,7 @@ class MyLandsTap extends StatelessWidget {
                               ),
                               SizedBox(height: 15),
                               Text(
-                                "description: ${service.description}",
+                                "${'description'.tr()}: ${service.description}",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -106,7 +107,7 @@ class MyLandsTap extends StatelessWidget {
                               ),
                               SizedBox(height: 15),
                               Text(
-                                "Location: 📍 ${service.address}",
+                                "${'location'.tr()}: 📍 ${service.address}",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -123,15 +124,16 @@ class MyLandsTap extends StatelessWidget {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          title: Text("Delete Service"),
-                                          content: Text(
-                                              "Are you sure you want to delete this service?"),
+                                        title: Text('delete_land'.tr()),
+                                                                                 content: Text('confirm_delete_land'.tr()),
+
                                           actions: [
                                             TextButton(
                                                 onPressed: () {
                                                   Navigator.pop(context);
                                                 },
-                                                child: Text("Cancel")),
+                                            child: Text('cancel'.tr()),
+                                                ),
                                             TextButton(
                                                 onPressed: () {
                                                   FirebaseFunctions
@@ -143,14 +145,15 @@ class MyLandsTap extends StatelessWidget {
                                                               .uid);
                                                   Navigator.pop(context);
                                                 },
-                                                child: Text("Delete")),
+                                            child: Text('delete'.tr()),
+                                                ),
                                           ],
                                         );
                                       },
                                     );
                                   },
                                   child: Text(
-                                    "Delete",
+                                  'delete'.tr(),
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.white,

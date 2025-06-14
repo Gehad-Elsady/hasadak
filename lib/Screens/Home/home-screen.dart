@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hasadak/Screens/Home/crops/crops_screen.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(width: 10),
             Text(
-              'Hasadak  🌱',
+              'app_title'.tr(),
               style: GoogleFonts.domine(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -64,35 +65,35 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.home,
               size: 30,
             ),
-            label: 'Home',
+            label: 'home'.tr(),
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage("assets/images/cultivator_9466919.png"),
               size: 30,
             ),
-            label: "Equipment",
+            label: "equipment".tr(),
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage("assets/images/sesame-seeds_7407779.png"),
               size: 30,
             ),
-            label: "Seeds",
+            label: "seeds".tr(),
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage("assets/images/sale.png"),
               size: 30,
             ),
-            label: "Crops",
+            label: "crops".tr(),
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage("assets/images/worker_1839274.png"),
               size: 30,
             ),
-            label: "Engineers",
+            label: "engineers".tr(),
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
@@ -100,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   "assets/images/environmental-stewardship_18455514.png"),
               size: 30,
             ),
-            label: "Share Land",
+            label: "share_land".tr(),
           ),
         ],
       ),

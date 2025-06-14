@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,11 +18,11 @@ class LandInfoScreen extends StatelessWidget {
 
     if (model == null) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text('Land Details'),
+       appBar: AppBar(
+          title: Text('land_details'.tr()),
         ),
-        body: const Center(
-          child: Text('No land details available.'),
+        body: Center(
+          child: Text('no_land_details'.tr()),
         ),
       );
     }
@@ -30,7 +31,7 @@ class LandInfoScreen extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text(
-          'Investment Details',
+          'investment_details'.tr(),
           style: GoogleFonts.domine(
             fontSize: 25,
             fontWeight: FontWeight.bold,
@@ -99,12 +100,14 @@ class LandInfoScreen extends StatelessWidget {
                       bottom: 16,
                       left: 16,
                       child: Text(
-                        model.address ?? 'No Address Available',
+                        model.address ?? 'no_address_available'.tr(),
                         style: GoogleFonts.domine(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
+                                                textAlign: context.locale.languageCode == 'ar' ? TextAlign.right : TextAlign.left,
+
                       ),
                     ),
                   ],
@@ -130,14 +133,14 @@ class LandInfoScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildDetailText('Land Overview', model.description),
+                  _buildDetailText('land_overview'.tr(), model.description),
                   const SizedBox(height: 12),
                   _buildPriceText(model.price),
                   const SizedBox(height: 12),
-                  _buildDetailText('Types Of Investment', model.investmentType),
-                  _buildDetailText('Land Owner Name', model.OwnerName),
-                  _buildDetailText('Land Owner Phone', model.OwnerPhone),
-                  _buildDetailText('Land Space', model.landSpace),
+                  _buildDetailText('types_of_investment'.tr(), model.investmentType),
+                  _buildDetailText('land_owner_name'.tr(), model.OwnerName),
+                  _buildDetailText('land_owner_phone'.tr(), model.OwnerPhone),
+                  _buildDetailText('land_space'.tr(), model.landSpace),
                   const SizedBox(height: 20),
                   Center(
                     child: ElevatedButton.icon(
@@ -154,7 +157,7 @@ class LandInfoScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.map, color: Colors.white),
                       label: Text(
-                        'View Land Location',
+                        'view_land_location'.tr(),
                         style: GoogleFonts.domine(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
@@ -187,7 +190,7 @@ class LandInfoScreen extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         Text(
-          value ?? 'No Data Available',
+          value ?? 'no_data_available'.tr(),
           style: GoogleFonts.lato(
               fontSize: 18,
               fontWeight: FontWeight.w400,
@@ -198,23 +201,26 @@ class LandInfoScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceText(String? price) {
-    return RichText(
-      text: TextSpan(
-        style: GoogleFonts.lato(
-            fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
-        children: [
-          const TextSpan(text: 'Price: '),
-          TextSpan(
-            text: price != null ? '\$$price' : 'Not Available',
-            style: GoogleFonts.lato(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: price != null ? Colors.green : Colors.redAccent,
-            ),
+ Widget _buildPriceText(String? price) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${'price'.tr()}:',
+          style: GoogleFonts.lato(
+              fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          price != null ? '${'egp'.tr()} $price' : 'not_available'.tr(),
+          style: GoogleFonts.lato(
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+            color: Colors.green[700],
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 12),
+      ],
     );
   }
 }

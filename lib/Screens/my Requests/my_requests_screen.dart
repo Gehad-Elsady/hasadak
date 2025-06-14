@@ -1,4 +1,5 @@
 import 'dart:async'; // For Timer
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
@@ -29,7 +30,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xFF56ab91),
         title: Text(
-          "Requests",
+          'requests'.tr(),
           style: GoogleFonts.domine(
             fontSize: 30,
             color: Colors.white,
@@ -58,10 +59,14 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
             }
             if (snapshot.hasError) {
               return Center(
-                  child: Text("Error loading history: ${snapshot.error}"));
+                 child: Text(
+                  'error_loading_requests'.tr(
+                    namedArgs: {'error': snapshot.error.toString()},
+                  ),
+                ),);
             }
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text("history-empty"));
+              return Center(child: Text('no_requests_found'.tr()));
             }
 
             final historyList = snapshot.data!;
@@ -99,13 +104,13 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${"service-type"}: ${history.orderType ?? 'N/A'}',
+                          '${"service_type".tr()}: ${history.orderType ?? 'N/A'}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         SizedBox(height: 8),
                         Text(
-                          "${"timestamp"}: ${formattedTime}",
+                          '${"timestamp".tr()}: ${formattedTime}',
                           style: TextStyle(fontSize: 16),
                         ),
 
@@ -113,7 +118,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: 'order-status' + ': ',
+                                text: 'order_status'.tr() + ': ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
@@ -147,16 +152,16 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${"add-service-name"}: ${history.serviceModel!.name}",
+                                  "${'service_name'.tr()}: ${history.serviceModel!.name}",
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 Text(
-                                  "${"add-service-description"}: ${history.serviceModel!.description}",
+                                  "${'service_description'.tr()}: ${history.serviceModel!.description}",
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.white),
                                 ),
                                 Text(
-                                  "${"add-service-price"}: ${history.serviceModel!.price}",
+                                  "${'price'.tr()}: ${history.serviceModel!.price}",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
@@ -183,16 +188,16 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Service Name: ${item.serviceModel.name}",
+                                      "${'service_name'.tr()}: ${item.serviceModel.name}",
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      "Service Description: ${item.serviceModel.description}",
+                                      "${'service_description'.tr()}: ${item.serviceModel.description}",
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.white),
                                     ),
                                     Text(
-                                      "Price: ${item.serviceModel.price}",
+                                      "${'price'.tr()}: ${item.serviceModel.price}",
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
@@ -232,10 +237,11 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          title: Text("accept-order"),
+                                         title: Text('confirm_accept_order'.tr()),
+                                          content: Text('confirm_accept_message'.tr()),
                                           actions: [
                                             TextButton(
-                                              child: Text("yes"),
+                                              child: Text('yes'.tr()),
                                               onPressed: () {
                                                 // FirebaseFunctions.deleteHistoryOrder(
                                                 //     history.timestamp!);
@@ -250,7 +256,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                               },
                                             ),
                                             TextButton(
-                                              child: Text("no"),
+                                              child: Text('no'.tr()),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
@@ -261,7 +267,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                     );
                                   }, // Disable the button if not within the cancellation time
                                   child: Text(
-                                    "Accept",
+                                    'accept'.tr(),
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -284,10 +290,11 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-                                              title: Text("Complete-order"),
+                                             title: Text('confirm_complete_order'.tr()),
+                                              content: Text('confirm_complete_message'.tr()),
                                               actions: [
                                                 TextButton(
-                                                  child: Text("yes"),
+                                                  child: Text('yes'.tr()),
                                                   onPressed: () {
                                                     // FirebaseFunctions.deleteHistoryOrder(
                                                     //     history.timestamp!);
@@ -303,7 +310,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                                   },
                                                 ),
                                                 TextButton(
-                                                  child: Text("no"),
+                                                  child: Text('no'.tr()),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
@@ -314,7 +321,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                         );
                                       }, // Disable the button if not within the cancellation time
                                       child: Text(
-                                        "Complete",
+                                        'complete'.tr(),
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 18,
@@ -331,10 +338,12 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-                                              title: Text("cancel-order"),
+                                              title: Text('confirm_cancel_order'.tr()),
+                                              content: Text('confirm_cancel_message'.tr()),
+                                            
                                               actions: [
                                                 TextButton(
-                                                  child: Text("yes"),
+                                                  child: Text('yes'.tr()),
                                                   onPressed: () {
                                                     // FirebaseFunctions.deleteHistoryOrder(
                                                     //     history.timestamp!);
@@ -349,7 +358,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                                   },
                                                 ),
                                                 TextButton(
-                                                  child: Text("no"),
+                                                  child: Text('no'.tr()),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
@@ -360,7 +369,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                                         );
                                       }, // Disable the button if not within the cancellation time
                                       child: Text(
-                                        "Cancel",
+                                        'cancel'.tr(),
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 18,

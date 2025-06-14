@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
 
@@ -29,13 +30,13 @@ class Engineers extends StatelessWidget {
 
           if (snapshot.hasError) {
             return Center(
-                child: Text('Something went wrong: ${snapshot.error}'));
+                child: Text('error'.tr()));
           }
 
           if (!snapshot.hasData ||
               snapshot.data == null ||
               snapshot.data!.isEmpty) {
-            return Center(child: Text('No services found'));
+            return Center(child: Text('no_engineers_found'.tr()));
           }
 
           final services = snapshot.data!;
@@ -85,7 +86,7 @@ class Engineers extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Engineer: ${service.name}",
+                                "${'engineer'.tr()}: ${service.name}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -94,7 +95,7 @@ class Engineers extends StatelessWidget {
                               ),
                               SizedBox(height: 6),
                               Text(
-                                "Engineer Bio: ${service.bio}",
+                                "${'engineer_bio'.tr()}: ${service.bio}",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -102,7 +103,7 @@ class Engineers extends StatelessWidget {
                               ),
                               SizedBox(height: 6),
                               Text(
-                                "Location: 📍 ${service.address}",
+                                "${'location'.tr()}: 📍 ${service.address}",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -110,7 +111,7 @@ class Engineers extends StatelessWidget {
                               ),
                               SizedBox(height: 6),
                               Text(
-                                "Phone 📞: ${service.phone}",
+                                "${'phone'.tr()}: ${service.phone}",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -120,7 +121,7 @@ class Engineers extends StatelessWidget {
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: Text(
-                                  "${service.price} Pounds",
+                                  "${service.price} ${'pounds'.tr()}",
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

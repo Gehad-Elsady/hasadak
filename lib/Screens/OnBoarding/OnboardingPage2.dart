@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/photos/images.dart';
 import 'package:lottie/lottie.dart';
@@ -24,8 +25,8 @@ class OnboardingPage2 extends StatelessWidget {
           children: [
             Lottie.asset(Photos.onBoarding2, height: 300),
             const SizedBox(height: 30),
-            const Text(
-              'Manage your farm the smart way.',
+             Text(
+              'onboarding2_title'.tr(),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -34,8 +35,8 @@ class OnboardingPage2 extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 15),
-            const Text(
-              "You can manage your farm by buying seeds and rent equipment to make the farming process easy and share your land with investors",
+             Text(
+              'onboarding2_subtitle'.tr(),
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black,

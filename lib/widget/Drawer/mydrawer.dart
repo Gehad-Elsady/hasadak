@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +14,7 @@ import 'package:hasadak/Screens/cart/cart-screen.dart';
 import 'package:hasadak/Screens/contact/contact-screen.dart';
 import 'package:hasadak/Screens/history/historyscreen.dart';
 import 'package:hasadak/Screens/my%20Requests/my_requests_screen.dart';
+import 'package:hasadak/Screens/settings/settings_tab.dart';
 
 import 'social-media-icons.dart';
 
@@ -46,6 +48,8 @@ class MyDrawer extends StatelessWidget {
                           ),
                           Text(
                             snapshot.data!.email,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.domine(
                               fontSize: 20,
                               color: Colors.white,
@@ -79,7 +83,7 @@ class MyDrawer extends StatelessWidget {
                 }),
             ListTile(
               title: Text(
-                'Home',
+                'home'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -94,7 +98,7 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Text(
-                'Cart',
+'cart'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -111,7 +115,7 @@ class MyDrawer extends StatelessWidget {
 
             ListTile(
               title: Text(
-                'Sell Service',
+                'sell_service'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -126,7 +130,7 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Text(
-                'Shared Land',
+                'shared_land'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -144,7 +148,7 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Text(
-                'My Services',
+                'my_services'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -160,7 +164,7 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Text(
-                'My Requests',
+                'my_requests'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -175,7 +179,7 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Text(
-                'History',
+                'history'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -192,7 +196,7 @@ class MyDrawer extends StatelessWidget {
 
             ListTile(
               title: Text(
-                'Contact Us',
+                'contact_us'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -210,7 +214,7 @@ class MyDrawer extends StatelessWidget {
               leading:
                   const Icon(Icons.account_circle, color: Color(0xFF56ab91)),
               title: Text(
-                'Profile',
+                'profile'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,
@@ -223,10 +227,24 @@ class MyDrawer extends StatelessWidget {
                 Navigator.pushNamed(context, UserProfile.routeName);
               },
             ),
+             ListTile(
+              leading: const Icon(Icons.settings, color: Color(0xFF56ab91)),
+              title: Text(
+                'settings'.tr(),
+                style: GoogleFonts.domine(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+            Navigator.pushReplacementNamed(context, SettingsTab.routeName);
+              },
+            ),
             ListTile(
               leading: const Icon(Icons.logout, color: Color(0xFF56ab91)),
               title: Text(
-                'Logout',
+                'logout'.tr(),
                 style: GoogleFonts.domine(
                   fontSize: 20,
                   color: Colors.black,

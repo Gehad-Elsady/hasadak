@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import 'package:hasadak/Screens/cart/cart-screen.dart';
 import 'package:hasadak/Screens/contact/contact-screen.dart';
 import 'package:hasadak/Screens/history/historyscreen.dart';
 import 'package:hasadak/Screens/my%20Requests/my_requests_screen.dart';
+import 'package:hasadak/Screens/settings/settings_tab.dart';
 import 'package:hasadak/notifications/notification.dart';
 import 'package:hasadak/provider/check-user.dart';
 import 'package:hasadak/provider/finish-onboarding.dart';
@@ -26,6 +28,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+    await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -38,10 +41,22 @@ void main() async {
   //   androidProvider: AndroidProvider.playIntegrity,
   //   appleProvider: AppleProvider.deviceCheck,
   // );
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => FinishOnboarding()),
-    ChangeNotifierProvider(create: (_) => CheckUser()),
-  ], child: const MyApp()));
+ runApp(EasyLocalization(
+    supportedLocales: [
+      Locale('en'),
+      Locale('ar'),
+    ],
+    path: 'assets/translation',
+    saveLocale: true,
+    startLocale: Locale("ar"),
+    child: MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FinishOnboarding()),
+        ChangeNotifierProvider(create: (_) => CheckUser()),
+      ],
+      child: const MyApp(),
+    ),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -50,6 +65,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       initialRoute: SplashScreen.routeName,
       routes: {
@@ -70,6 +88,7 @@ class MyApp extends StatelessWidget {
         MySecrvicesScreen.routeName: (context) => MySecrvicesScreen(),
         UpdateServices.routeName: (context) => UpdateServices(),
         MyRequestsScreen.routeName: (context) => MyRequestsScreen(),
+        SettingsTab.routeName: (context) => SettingsTab(),
       },
     );
   }

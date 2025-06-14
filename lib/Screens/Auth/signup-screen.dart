@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Screens/Auth/login-screen.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
@@ -56,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'Signup',
+                        'signup_title'.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 24),
                       ),
@@ -64,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter your name";
+                            return 'name_required'.tr();
                           }
                           return null;
                         },
@@ -76,7 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           prefixIcon: Icon(
                             Icons.person,
                           ),
-                          hintText: "Name",
+                          hintText: 'name_hint'.tr(),
                           hintStyle: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -92,10 +93,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter your age";
+                            return 'age_required'.tr();
+                          }
+                          if (int.tryParse(value) == null) {
+                            return 'age_invalid'.tr();
                           }
                           if (int.parse(value) < 20) {
-                            return "Sorry, age must be at least 20";
+                            return 'age_invalid'.tr();
                           }
                           return null;
                         },
@@ -108,7 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           prefixIcon: Icon(
                             Icons.numbers,
                           ),
-                          hintText: "Age",
+                          hintText: 'age_hint'.tr(),
                           hintStyle: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -124,13 +128,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter your email";
+                            return 'email_required'.tr();
                           }
                           final bool emailValid = RegExp(
-                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z]+\.[a-zA-Z]+")
-                              .hasMatch(value);
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z]+\.[a-zA-Z]+"
+                          ).hasMatch(value);
                           if (!emailValid) {
-                            return "Please enter a valid email";
+                            return 'email_invalid'.tr();
                           }
                           return null;
                         },
@@ -143,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           prefixIcon: Icon(
                             Icons.email,
                           ),
-                          hintText: "Email",
+                          hintText: 'email_hint'.tr(),
                           hintStyle: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -159,11 +163,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       TextFormField(
                         validator: (value) {
                           final RegExp regex = RegExp(
-                              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$'
+                          );
                           if (value == null || value.isEmpty) {
-                            return 'Please enter a password';
+                            return 'password_required'.tr();
                           } else if (!regex.hasMatch(value)) {
-                            return 'Password must include an uppercase letter, a number, and a special character';
+                            return 'password_requirements'.tr();
                           }
                           return null;
                         },
@@ -176,7 +181,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           prefixIcon: Icon(
                             Icons.lock,
                           ),
-                          hintText: "Password",
+                        hintText: 'password_hint'.tr(),
                           hintStyle: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -211,7 +216,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                           Lottie.asset(Photos.create),
                                           SizedBox(height: 16),
                                           Text(
-                                            "Please Verify Your Email Address to Login",
+                                            'signup_success'.tr(),
                                             style: TextStyle(fontSize: 20),
                                             textAlign: TextAlign.center,
                                           ),
@@ -232,14 +237,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                    title: Text("Error"),
+                                    title: Text("error".tr()),
                                     content: Text(e.toString()),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: Text('OK'),
+                                        child: Text('ok'.tr()),
                                       ),
                                     ],
                                   ),
@@ -249,7 +254,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           }
                         },
                         child: Text(
-                          "Submit",
+                        'signup_button'.tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -265,14 +270,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: Text.rich(
                             textAlign: TextAlign.center,
                             TextSpan(
-                              text: "have an account?  ",
+                          text: 'already_have_account'.tr(),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium
                                   ?.copyWith(fontSize: 15),
                               children: [
                                 TextSpan(
-                                  text: "Login",
+                              text: 'login'.tr(),
                                   style: TextStyle(
                                     color: Color(0xffffffff),
                                   ),

@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
@@ -14,31 +15,33 @@ class WelcomePart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        Locale currentLocale = context.locale;
     return FutureBuilder(
       future: FirebaseFunctions.readUserData(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('${'error'.tr()}: ${snapshot.error}'));
         } else if (!snapshot.hasData) {
-          return const Center(child: Text('No user data available.'));
+          return Center(child: Text('no_user_data'.tr()));
         }
 
         var userData = snapshot.data;
-        String userName = userData?.name ?? 'User';
+        String userName = userData?.name ?? 'user'.tr();
 
         return SingleChildScrollView(
           child: Stack(
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: 25),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding:  currentLocale.languageCode  == 'ar'? EdgeInsets.only(right: 20.0):EdgeInsets.only(left: 20),
                     child: AnimatedTextKit(
                       animatedTexts: [
-                        TypewriterAnimatedText('Welcome to Hasadak',
+                        TypewriterAnimatedText(                          
+                          'welcome_title'.tr(),
                             textStyle: GoogleFonts.domine(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -52,9 +55,9 @@ class WelcomePart extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: currentLocale.languageCode == 'ar'? EdgeInsets.only(right: 20.0):EdgeInsets.only(left: 20),
                     child: Text(
-                      userName ?? "User",
+                      userName,
                       style: GoogleFonts.domine(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -64,9 +67,9 @@ class WelcomePart extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding:  currentLocale.languageCode  == 'ar'? EdgeInsets.only(right: 20.0):EdgeInsets.only(left: 20),
                     child: Text(
-                      "Discover the world of\nplanting with us.",
+                      'discover_text'.tr(),
                       style: GoogleFonts.domine(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -77,9 +80,9 @@ class WelcomePart extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30.0),
+                padding:  EdgeInsets.only(top: 30.0),
                 child: Align(
-                  alignment: Alignment.topRight,
+                  alignment:  currentLocale.languageCode  == 'ar'? Alignment.topLeft: Alignment.topRight,
                   child: Lottie.asset(
                     "assets/lottie/Animation - 1733168275104.json",
                     width: MediaQuery.of(context).size.width * 0.55,

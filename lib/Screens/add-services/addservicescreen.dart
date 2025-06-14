@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -90,7 +91,7 @@ class _AddServicePageState extends State<AddServicePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Add Service',
+          'add_service'.tr(),
           style: GoogleFonts.domine(
             fontSize: 30,
             color: Colors.white,
@@ -126,7 +127,7 @@ class _AddServicePageState extends State<AddServicePage> {
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     controller: _nameController,
                     decoration: InputDecoration(
-                      labelText: 'Service Name',
+                      labelText: 'service_name'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -166,7 +167,7 @@ class _AddServicePageState extends State<AddServicePage> {
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     controller: _descriptionController,
                     decoration: InputDecoration(
-                      labelText: 'Description',
+                      labelText: 'description'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -207,7 +208,7 @@ class _AddServicePageState extends State<AddServicePage> {
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     controller: _priceController,
                     decoration: InputDecoration(
-                      labelText: 'Price',
+                      labelText: 'price'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -247,7 +248,7 @@ class _AddServicePageState extends State<AddServicePage> {
                   DropdownButtonFormField<String>(
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     decoration: InputDecoration(
-                      labelText: 'Service Type',
+                      labelText: 'service_type'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -302,7 +303,7 @@ class _AddServicePageState extends State<AddServicePage> {
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Text(
-                            'No image selected',
+                            'no_image_selected'.tr(),
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
@@ -311,7 +312,7 @@ class _AddServicePageState extends State<AddServicePage> {
                   ElevatedButton(
                     onPressed: _pickImage,
                     child: Text(
-                      'Pick Image',
+                      'tap_to_add_image'.tr(),
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -335,7 +336,7 @@ class _AddServicePageState extends State<AddServicePage> {
                       : ElevatedButton(
                           onPressed: _saveService,
                           child: Text(
-                            'Add Service',
+                            'add_service'.tr(),
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

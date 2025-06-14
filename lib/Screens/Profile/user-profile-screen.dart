@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,7 @@ class _UserProfileState extends State<UserProfile> {
       drawer: MyDrawer(),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('profile',
+        title: Text(          'profile'.tr(),
             style: TextStyle(
               color: Colors.white,
               fontSize: 35,
@@ -148,10 +149,10 @@ class _UserProfileState extends State<UserProfile> {
               children: [
                 Expanded(
                   child: TextFormField(
-                    style: const TextStyle(color: Colors.white),
+                    style:  TextStyle(color: Colors.white),
                     controller: firstName,
                     decoration: InputDecoration(
-                      labelText: 'First name',
+                      labelText:'first_name'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -182,7 +183,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                     ),
                     validator: (value) =>
-                        value!.isEmpty ? 'first-name-error' : null,
+                        value!.isEmpty ? 'first_name_required'.tr() : null,
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -191,7 +192,7 @@ class _UserProfileState extends State<UserProfile> {
                     style: const TextStyle(color: Colors.white),
                     controller: lastName,
                     decoration: InputDecoration(
-                      labelText: 'last name',
+                      labelText:  'last_name'.tr(),
                       labelStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -221,7 +222,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                     ),
                     validator: (value) =>
-                        value!.isEmpty ? 'last-name-error' : null,
+                        value!.isEmpty ? 'last_name_required'.tr() : null,
                   ),
                 ),
               ],
@@ -231,7 +232,7 @@ class _UserProfileState extends State<UserProfile> {
               style: const TextStyle(color: Colors.white),
               controller: email,
               decoration: InputDecoration(
-                labelText: 'email',
+                labelText: 'email'.tr(),
                 labelStyle: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -266,7 +267,7 @@ class _UserProfileState extends State<UserProfile> {
               style: const TextStyle(color: Colors.white),
               controller: address,
               decoration: InputDecoration(
-                labelText: 'address',
+                labelText: 'address'.tr(),
                 labelStyle: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -294,14 +295,15 @@ class _UserProfileState extends State<UserProfile> {
                   ),
                 ),
               ),
-              validator: (value) => value!.isEmpty ? 'address-error' : null,
+              validator: (value) =>                  value!.isEmpty ? 'address_required'.tr() : null,
+
             ),
             const SizedBox(height: 30),
             TextFormField(
               style: const TextStyle(color: Colors.white),
               controller: contactNumber,
               decoration: InputDecoration(
-                labelText: 'phone number',
+                labelText: 'phone_number'.tr(),
                 labelStyle: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -330,7 +332,7 @@ class _UserProfileState extends State<UserProfile> {
                 ),
               ),
               validator: (value) =>
-                  value!.isEmpty ? 'phone-number-error' : null,
+                  value!.isEmpty ? 'phone_required'.tr() : null,
             ),
             const SizedBox(height: 30),
             Row(
@@ -372,7 +374,8 @@ class _UserProfileState extends State<UserProfile> {
                       width: 2,
                     ),
                   ),
-                  child: Text('save',
+                  child: Text(                'save'.tr(),
+
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,

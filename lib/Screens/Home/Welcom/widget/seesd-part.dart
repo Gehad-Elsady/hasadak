@@ -9,7 +9,7 @@ class SeedsPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 215, // Adjust height as needed
+      height: 240, // Adjust height as needed
       child: StreamBuilder<List<ServiceModel>>(
         stream: FirebaseFunctions.getSeeds(),
         builder: (context, snapshot) {
@@ -35,7 +35,7 @@ class SeedsPart extends StatelessWidget {
               return SizedBox(
                 width: 200, // Adjust width as needed
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:  EdgeInsets.all(8.0),
                   child: ServicesItem(
                     service: service,
                     buttonTitle: "quick-order",

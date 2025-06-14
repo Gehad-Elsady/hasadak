@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hasadak/Screens/add-services/model/service-model.dart';
@@ -72,9 +73,9 @@ class ServicesItem extends StatelessWidget {
           SizedBox(height: 8),
           // Price Section
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding:  EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
-              "${service.price} EGP",
+              "${service.price} ${'egp'.tr()}",
               textAlign: TextAlign.right,
               style: GoogleFonts.montserrat(
                 fontSize: 16,

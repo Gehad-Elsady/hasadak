@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
@@ -33,9 +34,9 @@ class _ContactScreenState extends State<ContactScreen> {
       drawer: MyDrawer(),
       appBar: AppBar(
         title: Text(
-          'contact',
+          'contact'.tr(),
           style: TextStyle(
-            color: Colors.blue,
+            color: const Color.fromARGB(255, 151, 161, 169),
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
@@ -63,7 +64,7 @@ class _ContactScreenState extends State<ContactScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'contact-title',
+                    'contact_title'.tr(),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 24.0,
@@ -75,7 +76,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   style: TextStyle(color: Colors.black),
                   controller: _nameController,
                   decoration: InputDecoration(
-                    labelText: 'name',
+                    labelText: 'name'.tr(),
                     labelStyle: TextStyle(color: Colors.black, fontSize: 20.0),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
@@ -84,7 +85,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your name';
+                        return 'name_required'.tr();
                     }
                     return null;
                   },
@@ -94,7 +95,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   style: TextStyle(color: Colors.black),
                   controller: _emailController,
                   decoration: InputDecoration(
-                    labelText: 'enter-email',
+                    labelText: 'enter_email'.tr(),
                     labelStyle: TextStyle(color: Colors.black, fontSize: 20.0),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
@@ -104,10 +105,10 @@ class _ContactScreenState extends State<ContactScreen> {
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return 'email_required'.tr();
                     }
                     if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                      return 'Please enter a valid email address';
+                      return 'invalid_email'.tr();
                     }
                     return null;
                   },
@@ -117,7 +118,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   style: TextStyle(color: Colors.black),
                   controller: _messageController,
                   decoration: InputDecoration(
-                    labelText: 'massage',
+                    labelText: 'massage'.tr(),
                     labelStyle: TextStyle(color: Colors.black, fontSize: 20.0),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
@@ -127,7 +128,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   maxLines: 4,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a message';
+                      return 'message_required'.tr();
                     }
                     return null;
                   },
@@ -167,7 +168,7 @@ class _ContactScreenState extends State<ContactScreen> {
                       }
                     },
                     child: Text(
-                      'send',
+                      'send'.tr(),
                       style: TextStyle(fontSize: 25.0, color: Colors.blue),
                     ),
                   ),

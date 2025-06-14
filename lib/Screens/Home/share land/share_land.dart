@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
 import 'package:hasadak/Screens/Home/share%20land/share_land_info.dart';
@@ -29,14 +30,14 @@ class ShareLand extends StatelessWidget {
           }
 
           if (snapshot.hasError) {
-            return Center(
-                child: Text('Something went wrong: ${snapshot.error}'));
+                       return Center(child: Text('error'.tr()));
+
           }
 
           if (!snapshot.hasData ||
               snapshot.data == null ||
               snapshot.data!.isEmpty) {
-            return Center(child: Text('No Lands found'));
+            return Center(child: Text('no_lands_found'.tr()));
           }
 
           final services = snapshot.data!;
@@ -94,7 +95,7 @@ class ShareLand extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'Investment Type:\n',
+                                        text: '${'investment_type'.tr()}:\n',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,
@@ -112,7 +113,7 @@ class ShareLand extends StatelessWidget {
                                 ),
                                 SizedBox(height: 15),
                                 Text(
-                                  "description: ${service.description}",
+                                  "${'description'.tr()}: ${service.description}",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -120,7 +121,7 @@ class ShareLand extends StatelessWidget {
                                 ),
                                 SizedBox(height: 15),
                                 Text(
-                                  "Location: 📍 ${service.address}",
+                                  "${'location'.tr()}: 📍 ${service.address}",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(

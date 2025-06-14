@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hasadak/Screens/Home/crops/crops_screen.dart';
@@ -36,7 +37,7 @@ class _MySecrvicesScreenState extends State<MySecrvicesScreen> {
             ),
             SizedBox(width: 10),
             Text(
-              'My Services',
+              'my_services'.tr(),
               style: GoogleFonts.domine(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -66,21 +67,21 @@ class _MySecrvicesScreenState extends State<MySecrvicesScreen> {
               AssetImage("assets/images/cultivator_9466919.png"),
               size: 30,
             ),
-            label: "Equipment",
+            label: "equipment".tr(),
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage("assets/images/sesame-seeds_7407779.png"),
               size: 30,
             ),
-            label: "Seeds",
+            label: "seeds".tr(),
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage("assets/images/sale.png"),
               size: 30,
             ),
-            label: "Crops",
+            label: "crops".tr(),
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
@@ -88,7 +89,7 @@ class _MySecrvicesScreenState extends State<MySecrvicesScreen> {
                   "assets/images/environmental-stewardship_18455514.png"),
               size: 30,
             ),
-            label: "Share Land",
+            label: "share_land".tr(),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,10 +19,10 @@ class InfoScreen extends StatelessWidget {
     if (model == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Seed Details'),
+          title: Text('seed_details'.tr()),
         ),
-        body: const Center(
-          child: Text('No service details available.'),
+        body:  Center(
+          child: Text('no_service_details'.tr()),
         ),
       );
     }
@@ -30,7 +31,7 @@ class InfoScreen extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text(
-          '${model.name ?? 'Seed Details'}',
+          model.name ?? 'seed_details'.tr(),
           style: GoogleFonts.domine(
             fontSize: 25,
             fontWeight: FontWeight.bold,
@@ -55,7 +56,7 @@ class InfoScreen extends StatelessWidget {
             await FirebaseFunctions.addCartService(cartData);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Service added successfully!'),
+                  content: Text('service_added'.tr()),
               ),
             );
           },
@@ -116,7 +117,7 @@ class InfoScreen extends StatelessWidget {
                         bottom: 16,
                         left: 16,
                         child: Text(
-                          model.name ?? 'No Name Available',
+                          model.name ?? 'no_name_available'.tr(),
                           style: GoogleFonts.domine(
                             color: Colors.white,
                             fontSize: 24,
@@ -149,7 +150,7 @@ class InfoScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 8),
                     Text(
-                      'Product Overview:\n ${model.description ?? 'No Description Available'}',
+                      '${'product_overview'.tr()}:\n${model.description ?? '${'no_description'.tr()}'}',
                       style: GoogleFonts.lato(
                         fontSize: 23,
                         fontWeight: FontWeight.w400,
@@ -165,11 +166,11 @@ class InfoScreen extends StatelessWidget {
                           color: const Color(0xFF555555),
                         ),
                         children: [
-                          const TextSpan(text: 'Price: '),
+                          TextSpan(text: '${'price'.tr()}: '),
                           TextSpan(
                             text: model.price != null
-                                ? '\$${model.price}'
-                                : 'Not Available',
+                                ? '${model.price} ${'egp'.tr()}'
+                                : 'not_available'.tr(),
                             style: GoogleFonts.lato(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
@@ -183,7 +184,7 @@ class InfoScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     Text(
-                      'Types: ${model.type ?? 'No Types Available'}',
+                      '${'types'.tr()}: ${model.type ?? '${'no_types'.tr()}'}',
                       style: GoogleFonts.lato(
                         fontSize: 20,
                         fontWeight: FontWeight.w400,

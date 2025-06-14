@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/photos/images.dart';
 import 'package:lottie/lottie.dart';
@@ -24,8 +25,8 @@ class OnboardingPage3 extends StatelessWidget {
           children: [
             Lottie.asset(Photos.onBoarding3, height: 300),
             const SizedBox(height: 30),
-            const Text(
-              'Sell your crops easily',
+             Text(
+              'onboarding3_title'.tr(),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -34,8 +35,8 @@ class OnboardingPage3 extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 15),
-            const Text(
-              'You can do this by adding your crops to the shop list where clients can find and buy it',
+             Text(
+              'onboarding3_subtitle'.tr(),
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black,

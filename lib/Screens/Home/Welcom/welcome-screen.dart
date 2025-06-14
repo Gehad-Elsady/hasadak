@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasadak/Screens/Home/Welcom/widget/equipment-part.dart';
 import 'package:hasadak/Screens/Home/Welcom/widget/partners-part.dart';
@@ -30,19 +31,19 @@ class WelcomeScreen extends StatelessWidget {
             const SizedBox(height: 20), // Spacing between sections
 
             // Seeds section
-            MyDivider(text: "Seeds"),
+            MyDivider(text: 'seeds_section'.tr()),
             SeedsPart(),
 
             const SizedBox(height: 20), // Spacing between sections
 
             // Equipment section
-            MyDivider(text: "Equipment"),
+            MyDivider(text: 'equipment_section'.tr()),
             EquipmentPart(),
 
             const SizedBox(height: 20), // Spacing between sections
 
             // Partners section
-            MyDivider(text: "Partners"),
+            MyDivider(text: 'partners_section'.tr()),
             const SizedBox(height: 10), // Spacing between sections
 
             PartnersPart(),

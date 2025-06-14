@@ -1,4 +1,5 @@
 import 'dart:async'; // For Timer
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hasadak/Backend/firebase_functions.dart';
@@ -28,7 +29,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xFF56ab91),
         title: Text(
-          "history",
+          'history'.tr(),
           style: GoogleFonts.domine(
             fontSize: 30,
             color: Colors.white,
@@ -57,12 +58,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
             }
             if (snapshot.hasError) {
               return Center(
-                  child: Text("Error loading history: ${snapshot.error}"));
+                  child: Text(
+                  'error_loading_history'.tr(
+                    namedArgs: {'error': snapshot.error.toString()},
+                  ),
+                ),
+              );
             }
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return Center(
                   child: Text(
-                "history-empty",
+                  'no_history_found'.tr(),
                 style: GoogleFonts.lato(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -105,13 +111,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${"service-type"}: ${history.orderType ?? 'N/A'}',
+                          '${'service_type'.tr()}: ${history.orderType ?? 'N/A'}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         SizedBox(height: 8),
                         Text(
-                          "${"timestamp"}: ${formattedTime}",
+                          '${'timestamp'.tr()}: $formattedTime',
                           style: TextStyle(fontSize: 16),
                         ),
 
@@ -119,7 +125,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: 'order-status' + ': ',
+                                text: '${'order_status'.tr()}: ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
@@ -153,16 +159,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${"add-service-name"}: ${history.serviceModel!.name}",
+                                  "${'service_name'.tr()}: ${history.serviceModel!.name}",
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 Text(
-                                  "${"add-service-description"}: ${history.serviceModel!.description}",
+                                  "${'service_description'.tr()}: ${history.serviceModel!.description}",
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.white),
                                 ),
                                 Text(
-                                  "${"add-service-price"}: ${history.serviceModel!.price}",
+                                  "${'price'.tr()}: ${history.serviceModel!.price}",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
@@ -189,16 +195,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Service Name: ${item.serviceModel.name}",
+                                      "${'service_name'.tr()}: ${item.serviceModel.name}",
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      "Service Description: ${item.serviceModel.description}",
+                                      "${'service_description'.tr()}: ${item.serviceModel.description}",
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.white),
                                     ),
                                     Text(
-                                      "Price: ${item.serviceModel.price}",
+                                      "${'price'.tr()}: ${item.serviceModel.price}",
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
@@ -219,8 +225,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
                         // Display a countdown for cancel eligibility if within 5 minutes
                         if (enableCancelButton)
-                          Text(
-                            "Cancel within ${5 - timeDiff.inMinutes} minutes",
+                           Text(
+                            'cancel_within_minutes'.tr(
+                              namedArgs: {'minutes': (5 - timeDiff.inMinutes).toString()},
+                            ),
                             style: TextStyle(
                               color: Colors.red,
                               fontWeight: FontWeight.bold,
@@ -238,10 +246,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          title: Text("cancel-order"),
+                                          title: Text('confirm_cancel_order'.tr()),
+                                          content: Text('confirm_cancel_message'.tr()),
                                           actions: [
                                             TextButton(
-                                              child: Text("yes"),
+                                              child: Text('yes'.tr()),
                                               onPressed: () {
                                                 FirebaseFunctions
                                                     .deleteHistoryOrder(
@@ -250,7 +259,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                               },
                                             ),
                                             TextButton(
-                                              child: Text("no"),
+                                              child: Text('no'.tr()),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
@@ -262,7 +271,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   }
                                 : null, // Disable the button if not within the cancellation time
                             child: Text(
-                              "cancel",
+                              'cancel'.tr(),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
